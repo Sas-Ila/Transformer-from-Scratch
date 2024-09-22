@@ -274,12 +274,6 @@ def build_transformer(src_vocab_size: int, tgt_vocab_size: int, src_seq_len: int
         if p.dim() > 1:
             nn.init.xavier_uniform_(p)
     return transformer
-    
-change1 = torch.randn(100)
-print(change1)
-
-
-
 
 
 
