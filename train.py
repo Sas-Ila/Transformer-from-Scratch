@@ -1,6 +1,12 @@
+from model import build_transformer
+from dataset import BilingualDataset, causal_mask
+
+
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader, random_split
+
+
 
 
 from datasets import load_datasets
@@ -64,3 +70,6 @@ def get_ds(config):
 
     return train_dataloader, val_dataloader, tokenizer_src, tokenizer_tgt
 
+def get_model(config, vocab_src_len, vocab_tgt_len):
+    model = build_transformer(vocab_src_len, vocab_tgt_len, config["seq_len"], config['seq_len'], d_model=config['d_model'])
+    return model

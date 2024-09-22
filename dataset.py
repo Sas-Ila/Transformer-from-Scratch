@@ -4,7 +4,7 @@ from torch.utils.data import Dataset
 
 class BilingualDataset(Dataset):
 
-    def __init__(self, ds, tokenizer_src, tokenizer_tgt, src_lang, tgt_lang, seq_len):
+    def __init__(self, ds, tokenizer_src, tokenizer_tgt, src_lang, tgt_lang, seq_len) -> None:
         super().__init__()
         self.seq_len = seq_len
 
@@ -21,7 +21,7 @@ class BilingualDataset(Dataset):
     def __len__(self):
         return len(self.ds)
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx) -> Any:
         src_target_pair = self.ds[idx]
         src_text = src_target_pair['translation'][self.src_lang]
         tgt_text = src_target_pair['translation'][self.tgt_lang]
