@@ -56,8 +56,8 @@ class LayerNormalization(nn.Module):
 
     def forward(self, x):
         mean = x.mean(dim = -1, keepdim = True)
-        std = x.std(dim = -1, keepdim = True)
-        return self.gamma * (x - mean) / (std + self.eps) + self.beta
+        var = x.var(dim = -1, keepdim = True)
+        return self.gamma * (x - mean) / (var + self.eps) + self.beta
     
 class FeedForwardBlock(nn.Module):
     def __init__(self, d_model: int, d_ff: int, dropout: float) -> None:
@@ -68,7 +68,6 @@ class FeedForwardBlock(nn.Module):
         self.lin2 = nn.Linear(d_ff, d_model)
 
     def forward(self, x):
-
         x = self.lin1(x)
         x = self.gelu(x)
         x = self.dropout(x)
